@@ -1,5 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&display=swap");
 
+$deepGreen: #2f5d3a;
+$leafGreen: #5e9c45;
+$harvestGold: #d9a441;
+$terracottaSoil: #a85d3a;
+$warmWheatBeige: #d8c7a1;
+$oliveGreen: #7a8444;
+
 .carousel {
   box-sizing: border-box;
   position: relative;
@@ -9,20 +16,31 @@
   font-family: "Lexend", sans-serif;
   overflow: hidden;
 
-  h1 {
-    color: #fff;
-  }
-
   .carousel-track {
     display: flex;
     width: 100%;
     height: 100%;
-    transition: all 0.5s ease-in-out;
+    transition: all 0.5s cubic-bezier(0.5, 0, 0.75, 0);
 
     .carousel-slide {
+      position: relative;
+      overflow: hidden;
       flex: 0 0 auto;
       width: 100%;
       height: 100%;
+
+      .carousel-overlay {
+        position: absolute;
+        inset: 0;
+        //background: rgba(76, 66, 124, 0.55);
+        transform: scaleY(0);
+        transform-origin: bottom;
+        transition: transform 0.3s ease;
+
+        &.is-active {
+          transform: scaleY(1);
+        }
+      }
 
       img {
         display: block;
@@ -36,9 +54,9 @@
   .footer {
     position: absolute;
     display: flex;
-    gap: 0px;
+    z-index: 5;
     bottom: -5px;
-    background: rgba(191, 215, 234, 0.2);
+    background: rgba(97, 101, 104, 0.7);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(191, 215, 234, 0.3);
     width: 100%;
@@ -51,7 +69,7 @@
       margin-right: 0px !important;
       align-items: center; /* Vertically centers text */
       justify-content: center; /* Horizontally centers text */
-      border-left: 1px solid rgba(255, 255, 255, 0.3);
+      border-left: 1px solid rgba(255, 255, 255, 0.6);
       width: 100%;
       padding: 0px 20px;
       font-size: 18px;
@@ -69,7 +87,7 @@
     }
 
     .selected {
-      background-color: rgba(106, 214, 142, 0.3);
+      background-color: rgba(96, 146, 112, 0.3);
       border-top: 10px solid rgba(106, 214, 142, 0.8);
     }
   }
