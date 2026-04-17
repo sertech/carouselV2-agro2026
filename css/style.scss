@@ -42,6 +42,76 @@ $oliveGreen: #7a8444;
         }
       }
 
+      .carousel-frame {
+        position: absolute;
+        top: 8%;
+        left: 10%;
+        width: 20%;
+        height: 58%;
+        z-index: 3;
+
+        background: rgba(255, 255, 255, 0.6);
+
+        clip-path: polygon(
+          evenodd,
+          0% 0%,
+          100% 0%,
+          100% 100%,
+          0% 100%,
+          0% 0%,
+
+          6% 4%,
+          6% 96%,
+          94% 96%,
+          94% 4%,
+          6% 4%
+        );
+
+        opacity: 0;
+        transform: translateY(30px) scale(1.02);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
+        pointer-events: none;
+      }
+
+      .carousel-frame.is-active {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+
+      .carousel-content {
+        position: absolute;
+        left: 35%;
+        bottom: 50%;
+        z-index: 4;
+        max-width: 420px;
+        opacity: 0;
+        transform: translateY(24px);
+        transition:
+          opacity 0.45s ease,
+          transform 0.45s ease;
+      }
+
+      .carousel-content.is-active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .carousel-title {
+        margin: 0 0 12px;
+        color: #fff;
+        font-size: 2rem;
+        line-height: 1.1;
+      }
+
+      .carousel-description {
+        margin: 0;
+        color: #fff;
+        font-size: 1rem;
+        line-height: 1.5;
+      }
+
       img {
         display: block;
         width: 100%;

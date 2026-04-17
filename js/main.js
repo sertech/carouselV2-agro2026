@@ -4,15 +4,31 @@ const carouselButtons = document.querySelectorAll('.footer-btn');
 const carouselTrack = document.querySelector('.carousel-track');
 const carouselOverlays = document.querySelectorAll('.carousel-overlay');
 const trackTransitionMs = 700; // Should match the CSS transition duration for the track movement.
+const trackFrameTransitionMs = 1300; // Should match the CSS transition duration for the frame and overlay reveal.
+const carouselFrames = document.querySelectorAll('.carousel-frame');
+const carouselContents = document.querySelectorAll('.carousel-content');
 
 let pendingOverlayTimer; // Used to delay the overlay reveal until the slide transition finishes.
+let pendingFrameTimer; // Track which frame is pending to be revealed after the slide transition.
 
 const setActiveSlide = (activeIndex) => {
     clearTimeout(pendingOverlayTimer);
+    clearTimeout(pendingFrameTimer);
 
+    // reset all frames and overlays to the default state before activating the new one
     carouselOverlays.forEach((overlay) => {
         overlay.classList.remove('is-active');
     });
+
+    // reset all frames to the default state before activating the new one
+    carouselFrames.forEach((frame) => {
+        frame.classList.remove('is-active');
+    });
+
+    // reset all carousel content to the default state before activating the new one
+    carouselContents.forEach((content) => {
+        content.classList.remove('is-active');
+    })
 
     carouselTrack.style.transform = `translateX(-${activeIndex * 100}%)`;
 
@@ -47,6 +63,16 @@ const setActiveSlide = (activeIndex) => {
         }
         carouselOverlays[activeIndex]?.classList.add('is-active');
     }, trackTransitionMs);
+
+    pendingFrameTimer = window.setTimeout(() => {
+        // switch (activeIndex) {
+        //     case 0:
+        //         carouselFrames[activeIndex].style.background = 'rgba(47, 93, 58, 0.78)';
+        //         break;
+        // }
+        carouselFrames[activeIndex]?.classList.add('is-active');
+        carouselContents[activeIndex]?.classList.add('is-active');
+    }, trackFrameTransitionMs);
 };
 
 carouselButtons.forEach((button, index) => {
